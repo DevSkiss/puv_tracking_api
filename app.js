@@ -14,8 +14,8 @@ const locationRoutes = require('./routes/location');
 
 const connect = async () => {
   return await mongoose.connect(
-    //'mongodb+srv://admin:admin@puvts.ok9va.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-    'mongodb://localhost/puvts',
+    'mongodb+srv://admin:admin@puvts.ok9va.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+    //'mongodb://localhost/puvts',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
