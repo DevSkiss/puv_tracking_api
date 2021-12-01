@@ -1,61 +1,74 @@
-const Section = require('../models/Location');
+const Location = require('../models/Location');
 
-//TODO Create Section
-module.exports.createSection = async (params) => {
-  let newSection = new Section({
-    name: params.name,
-    subjects: params.subjects,
-    students: params.students,
-    maxStudent: params.maxStudent,
-    createdBy: params.createdBy,
+//TODO Create Location
+module.exports.addLocation = async (params) => {
+  let newLocation = new Location({
+    longitude: params.longitude,
+    latitude: params.latitude,
+    userId: params.userId,
+    user_type: params.user_type,
   });
-  let result = await newSection.save();
-  return result ? true : false;
-};
-
-//TODO Get All Section
-module.exports.getAllSection = async () => {
-  const result = await Section.find({});
+  let result = await newLocation.save();
   return result;
 };
 
-//TODO Single Section
-module.exports.getOneSection = async (params) => {
-  const result = await Section.findById(params.sectionId);
+//TODO Get All Active Location
+module.exports.getAllActiveLocation = async () => {
+  const result = await Location.find({ is_active: true });
   return result;
 };
 
-//TODO Update Section
-module.exports.updateSection = async (params) => {
-  let updateSection = {
-    subject: params.subject,
-    maxStudent: params.maxStudent,
+//TODO Get All Active Location by User Type
+module.exports.getLocationByUserType = async (params) => {
+  const result = await Location.find({
+    $and: [{ is_active: true }, { user_type: params.user_type }],
+  });
+  return result;
+};
+
+//TODO Get All Active Location by User Type
+module.exports.getLocationByUserType = async (params) => {
+  const result = await Location.find({
+    $and: [{ is_active: true }, { user_type: params.user_type }],
+  });
+  return result;
+};
+
+//TODO Single Location
+module.exports.getOneLocation = async (params) => {
+  const result = await Location.findById(params.locationId);
+  return result;
+};
+
+//TODO Update Position
+module.exports.updatePosition = async (params) => {
+  let updatePosition = {
+    longitude: params.longitude,
+    latitude: params.latitude,
+    is_active: params.isActive,
   };
-  let result = await Section.findByIdAndUpdate(params.sectionId, updateSection);
-  return result ? true : false;
+  try {
+    let location = await Location.findOne({ userId: params.userId });
+    let result = await Location.findByIdAndUpdate(location._id, updatePosition);
+
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 //TODO Delete Class
-module.exports.deleteSection = async (params) => {
-  const result = await Section.findByIdAndDelete(params.section);
-  return result ? true : false;
-};
-
-//TODO enroll student to a class or course
-//FIXME change the push
-module.exports.enrollStudentToClass = async (params) => {
-  let updatedEnrollment = {
-    sectionId: params.sectionId,
+module.exports.deactivateLocation = async (params) => {
+  let updatePosition = {
+    is_active: false,
   };
-  const student = await Student.findByIdAndUpdate(
-    params.studentId,
-    updatedEnrollment
-  );
-  const section = await Section.findById(sectionId);
-  section.students.push({
-    studentId: studentId,
-  });
-  const result = await student.save();
 
-  return result ? (student ? true : false) : false;
+  try {
+    let location = await Location.findOne({ userId: params.userId });
+    let result = await Location.findByIdAndUpdate(location._id, updatePosition);
+
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
 };

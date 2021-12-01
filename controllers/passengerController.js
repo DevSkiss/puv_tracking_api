@@ -1,4 +1,5 @@
 const Passenger = require('../models/Passenger');
+const locationController = require('../controllers/locationController');
 const bcrypt = require('bcrypt');
 const auth = require('../auth');
 
@@ -11,6 +12,13 @@ module.exports.createPassenger = async (params) => {
     password: bcrypt.hashSync(params.password, 15),
   });
   let passenger = await newPassenger.save();
+  passenger.password = '';
+  locationController.addLocation({
+    latitude: '11.123',
+    longitude: '125.123',
+    userId: passenger._id,
+    user_type: 'passenger',
+  });
 
   return passenger;
 };
@@ -28,7 +36,7 @@ module.exports.login = async (params) => {
   if (isPasswordMatched) {
     result.password = '';
     return {
-      passenger: result,
+      user: result,
       access: auth.createAccessToken(result),
     };
   } else {

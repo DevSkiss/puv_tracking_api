@@ -1,51 +1,23 @@
-const mongoose = require("mongoose");
-const Schema = require("mongoose");
-const model = require("mongoose");
+const mongoose = require('mongoose');
+const Schema = require('mongoose');
+const model = require('mongoose');
 
 const adminSchema = new mongoose.Schema({
   firstname: {
     type: String,
-    required: [true, "First name is required"],
+    required: [true, 'First name is required'],
   },
   lastname: {
     type: String,
-    require: [true, "Last name is required"],
-  },
-  age: {
-    type: String,
-    require: [true, "Age is required"],
-  },
-  gender: {
-    type: String,
-    require: [true, "GEnder is rquired"],
-  },
-  birthday: {
-    type: Date,
-    require: [true, "Date is required"],
-  },
-  address: {
-    type: String,
-    require: [true, "Address Required"],
-  },
-  mobileNo: {
-    type: String,
-    require: [true, "Mobile Number is required"],
-  },
-  role: {
-    type: String,
-    default: "Admin",
-  },
-  imageUrl: {
-    type: String,
-    default: "",
+    require: [true, 'Last name is required'],
   },
   username: {
     type: String,
-    required: [true, "Username is required"],
+    required: [true, 'Username is required'],
   },
   password: {
     type: String,
-    required: [true, "Password is required"],
+    required: [true, 'Password is required'],
   },
   createdAt: {
     type: Date,
@@ -57,4 +29,4 @@ const adminSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Admin", adminSchema);
+module.exports = mongoose.model('Admin', adminSchema);

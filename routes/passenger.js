@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   const result = await PassengerController.login(req.body);
   if (result == false) {
-    res.send(404).send('Incorrect Username or Password');
+    res.sendStatus(404).send('Incorrect Username or Password');
   }
   res.send(result);
 });

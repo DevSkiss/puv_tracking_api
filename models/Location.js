@@ -1,33 +1,27 @@
-const mongoose = require("mongoose");
-const Schema = require("mongoose");
-const model = require("mongoose");
+const mongoose = require('mongoose');
+const Schema = require('mongoose');
+const model = require('mongoose');
 
-const sectionSchema = new mongoose.Schema({
-  name: {
+const locationSchema = new mongoose.Schema({
+  longitude: {
     type: String,
-    required: [true, "Name is required"],
+    required: [true, 'Longitude is required'],
   },
-  subjects: [
-    {
-      subjectId: {
-        type: String,
-      },
-    },
-  ],
-  students: [
-    {
-      studentId: {
-        type: String,
-      },
-    },
-  ],
-  createdBy: {
+  latitude: {
     type: String,
-    require: [true, "Created by is required"],
+    required: [true, 'Latitude is required'],
   },
-  maxStudents: {
-    type: Number,
-    require: [true, "Max Students is required"],
+  userId: {
+    type: String,
+    required: [true, 'User Id is required'],
+  },
+  is_active: {
+    type: Boolean,
+    default: true,
+  },
+  user_type: {
+    type: String,
+    required: [true, 'User Type is required'],
   },
   createdAt: {
     type: Date,
@@ -35,4 +29,4 @@ const sectionSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Section", sectionSchema);
+module.exports = mongoose.model('Location', locationSchema);

@@ -1,75 +1,43 @@
-const mongoose = require("mongoose");
-const Schema = require("mongoose");
-const model = require("mongoose");
+const mongoose = require('mongoose');
+const Schema = require('mongoose');
+const model = require('mongoose');
 
-const teacherSchema = new mongoose.Schema({
+const driverSchema = new mongoose.Schema({
   firstname: {
     type: String,
-    required: [true, "First name is required"],
+    required: [true, 'First name is required'],
   },
   lastname: {
     type: String,
-    require: [true, "Last name is required"],
+    required: [true, 'Last name is required'],
   },
-  age: {
+  plate_no: {
     type: String,
-    require: [true, "Age is required"],
+    required: [true, 'Plate No is required'],
   },
-  gender: {
+  license_no: {
     type: String,
-    require: [true, "GEnder is rquired"],
+    required: [true, 'License No is Required'],
   },
-  birthday: {
-    type: Date,
-    require: [true, "Date is required"],
+  mobile_no: {
+    type: String,
+    required: [true, 'Mobile Number is required'],
   },
   address: {
     type: String,
-    require: [true, "Address Required"],
+    required: [true, 'Address is Required'],
   },
-  mobileNo: {
-    type: String,
-    require: [true, "Mobile Number is required"],
+  active: {
+    type: Boolean,
+    default: true,
   },
-  specialization: {
-    type: String,
-    default: "",
-  },
-  role: {
-    type: String,
-    default: "Teacher",
-  },
-  imageUrl: {
-    type: String,
-    default: "",
-  },
-  subjects: [
-    {
-      subjectId: {
-        type: String,
-      },
-      subjectName: {
-        type: String,
-      },
-    },
-  ],
-  section: [
-    {
-      sectionId: {
-        type: String,
-      },
-      sectionName: {
-        type: String,
-      },
-    },
-  ],
   username: {
     type: String,
-    required: [true, "Username is required"],
+    required: [true, 'Username is required'],
   },
   password: {
     type: String,
-    required: [true, "Password is required"],
+    required: [true, 'Password is required'],
   },
   createdAt: {
     type: Date,
@@ -77,4 +45,4 @@ const teacherSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Teacher", teacherSchema);
+module.exports = mongoose.model('Driver', driverSchema);
